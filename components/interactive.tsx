@@ -1,0 +1,36 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {ArrowRight,ArrowUpRight,BookOpen,Check,Compass,ExternalLink,GraduationCap,Headphones,MessageCircle,Play,X} from 'lucide-react';
+import {products,type Product} from '@/lib/products';
+
+const glyphs:Record<string,string>={hallium:'한',kmate:'K',video:'늘',drama:'극'};
+export function ProductPreview({id}:{id:string}){
+ if(id==='hallium')return <div className="nui-sample"><div className="nui-sample-label"><BookOpen size={15}/> WORD OF THE MOMENT <span>01 / 04</span></div><div className="nui-korean">천천히 가도 괜찮아요.</div><p>It’s okay to go slowly.</p><div className="nui-progress"><span/></div><div className="nui-sample-foot"><Headphones size={16}/> Learn the sound, not just the word <ArrowRight size={16}/></div></div>;
+ if(id==='kmate')return <div className="nui-sample"><div className="nui-sample-label"><GraduationCap size={15}/> YOUR STUDY JOURNEY <span>02 / 04</span></div><div className="nui-display">Your next chapter<br/>in Korea.</div><div className="nui-people"><i>✳</i><i>한</i><i>+</i><span>Find people on the same journey.</span></div><div className="nui-sample-foot"><Compass size={16}/> Discover opportunities <ArrowRight size={16}/></div></div>;
+ if(id==='video')return <div className="nui-sample"><div className="nui-sample-label"><Headphones size={15}/> CONTEXT IS EVERYTHING <span>03 / 04</span></div><div className="nui-video"><span><Play size={22} fill="currentColor"/></span> Learn it in the moment.</div><div className="nui-sentence">오늘 날씨가 정말 좋아요!</div><div className="nui-sample-foot"><MessageCircle size={16}/> Hear it. Understand it. Use it. <ArrowRight size={16}/></div></div>;
+ return <div className="nui-sample"><div className="nui-sample-label"><MessageCircle size={15}/> EVERY SCENE HAS A STORY <span>04 / 04</span></div><div className="nui-drama"><span>극</span><div>우리 같이 갈래요?<small>Shall we go together?</small></div></div><p>Feel the dialogue. Find the meaning.</p><div className="nui-sample-foot"><Play size={16}/> The story is yours to explore <ArrowRight size={16}/></div></div>;
+}
+export function JourneyStage({onInspect}:{onInspect:(p:Product)=>void}){
+ const [active,setActive]=useState(0),p=products[active];
+ return <div className={'nui-stage nui-'+p.accent} aria-label="Choose an experience to preview">
+  <div className="nui-stage-top"><span><i/> INTERACTIVE ECOSYSTEM</span><span>0{active+1} / 04</span></div>
+  <div className="nui-window" key={p.id}><div className="nui-window-head"><span className="nui-window-logo">{glyphs[p.id]}</span>{p.name}<span className="nui-dots">● ● ●</span></div><ProductPreview id={p.id}/></div>
+  <div className="nui-stage-title"><div><small>DISCOVER THE EXPERIENCE</small><h3>{p.kicker}</h3></div><button aria-label={'Preview '+p.name} onClick={()=>onInspect(p)}><ArrowUpRight size={21}/></button></div>
+  <div className="nui-tabs" role="group" aria-label="Select a product">{products.map((x,i)=><button key={x.id} className={i===active?'active':''} aria-pressed={i===active} onClick={()=>setActive(i)}><span>{glyphs[x.id]}</span><small>{x.id==='drama'?'K-Drama':x.name}</small></button>)}</div>
+ </div>;
+}
+const paths=[
+ {title:'Start speaking Korean',subtitle:'Build your foundation',description:'Make your first words familiar, then build them into conversations.',ids:['hallium','video'],icon:BookOpen},
+ {title:'Learn through stories',subtitle:'Make language memorable',description:'Hear real expressions in context and follow the story behind every line.',ids:['drama','video'],icon:Play},
+ {title:'Find your way to Korea',subtitle:'Explore opportunities',description:'Connect with fellow applicants and prepare for the next step in your journey.',ids:['kmate','hallium'],icon:GraduationCap}
+];
+export function PathFinder({onInspect}:{onInspect:(p:Product)=>void}){
+ const [active,setActive]=useState(0),selected=paths[active];
+ return <section className="nui-path-section"><div className="wrap nui-path-inner"><div className="nui-path-intro"><span className="section-label">02 / MAKE IT YOURS</span><h2>Where would you<br/><em>like to begin?</em></h2><p>There’s no single way to explore Korea. Pick what speaks to you and discover a place to start.</p></div><div className="nui-path-right"><div className="nui-choices" role="group" aria-label="Choose your starting path">{paths.map((x,i)=>{const Icon=x.icon;return <button key={x.title} className={active===i?'active':''} aria-pressed={active===i} onClick={()=>setActive(i)}><span className="nui-choice-icon"><Icon size={20}/></span><span className="nui-choice-copy"><small>0{i+1} / {x.subtitle}</small><strong>{x.title}</strong></span><ArrowUpRight size={19}/></button>})}</div><div className="nui-recommendation" aria-live="polite"><span className="section-label">YOUR STARTING POINT</span><h3>{selected.title}</h3><p>{selected.description}</p><div>{products.filter(p=>selected.ids.includes(p.id)).map(p=><button key={p.id} onClick={()=>onInspect(p)}><i className={'nui-mini nui-'+p.accent}>{glyphs[p.id]}</i><span>{p.name}</span><ArrowUpRight size={16}/></button>)}</div></div></div></div></section>;
+}
+export function ProductDetails({product,onClose}:{product:Product|null,onClose:()=>void}){
+ const close=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{if(!product)return;const previous=document.activeElement as HTMLElement|null,old=document.body.style.overflow;document.body.style.overflow='hidden';close.current?.focus();const key=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose();if(e.key==='Tab'){const buttons=Array.from(document.querySelectorAll<HTMLElement>('.nui-dialog button,.nui-dialog a[href]'));if(!buttons.length)return;const first=buttons[0],last=buttons[buttons.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}};addEventListener('keydown',key);return()=>{document.body.style.overflow=old;removeEventListener('keydown',key);previous?.focus()}},[product,onClose]);
+ if(!product)return null;
+ return <div className="nui-overlay" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}><section className={'nui-dialog nui-'+product.accent} role="dialog" aria-modal="true" aria-labelledby="nui-dialog-title" aria-describedby="nui-dialog-description"><div className="nui-dialog-top"><span className="section-label">MEET THE NURI ECOSYSTEM / {product.number}</span><button ref={close} onClick={onClose} aria-label="Close preview"><X size={19}/></button></div><div className="nui-dialog-grid"><div><div className="nui-dialog-glyph">{glyphs[product.id]}</div><span className="eyebrow">{product.category}</span><h2 id="nui-dialog-title">{product.name}<span>.</span></h2><strong>{product.kicker}</strong><p id="nui-dialog-description">{product.description}</p><div className="nui-dialog-features">{product.features.map(x=><span key={x}><Check size={14}/>{x}</span>)}</div>{product.href?<a className="button-dark" href={product.href} target="_blank" rel="noopener noreferrer">Open {product.name}<ExternalLink size={17}/></a>:<div className="nui-link-pending">The official product link is being verified. This preview remains available.</div>}</div><div className="nui-dialog-preview"><ProductPreview id={product.id}/></div></div></section></div>;
+}
