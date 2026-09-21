@@ -22,7 +22,7 @@ export default function Hub() {
  const [saved,setSaved]=useState<string[]>([]);
  const [modal,setModal]=useState<Product|null>(null);
  const searchRef=useRef<HTMLInputElement>(null);
- useEffect(()=>{try{const value=JSON.parse(localStorage.getItem('nuri.saved-products')||'[]');if(Array.isArray(value))setSaved(value.filter((v):v is string=>typeof v==='string'))}catch{}if(location.hash==='#hub')setView('dashboard');const pop=()=>setView(location.hash==='#hub'?'dashboard':'home');addEventListener('popstate',pop);return()=>removeEventListener('popstate',pop)},[]);
+ useEffect(()=>{try{const value=JSON.parse(localStorage.getItem('nuri.saved-products')||'[]');if(Array.isArray(value))setSaved(value.filter((v:unknown):v is string=>typeof v==='string'))}catch{}if(location.hash==='#hub')setView('dashboard');const pop=()=>setView(location.hash==='#hub'?'dashboard':'home');addEventListener('popstate',pop);return()=>removeEventListener('popstate',pop)},[]);
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.key==='/'&&view==='dashboard'&&!modal&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLTextAreaElement)){e.preventDefault();searchRef.current?.focus()}};addEventListener('keydown',key);return()=>removeEventListener('keydown',key)},[view,modal]);
  const toggleSaved=(id:string)=>setSaved(previous=>{const next=previous.includes(id)?previous.filter(v=>v!==id):[...previous,id];try{localStorage.setItem('nuri.saved-products',JSON.stringify(next))}catch{}return next});
  const navigate = (v:'home'|'dashboard') => { if(v!==view)history.pushState({},'',v==='dashboard'?'#hub':location.pathname+location.search);setView(v);setMenu(false);window.scrollTo({top:0,behavior:'smooth'}); };
