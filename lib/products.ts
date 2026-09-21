@@ -1,0 +1,8 @@
+export type Product = { id: string; number: string; name: string; kicker: string; description: string; category: string; accent: string; href?: string; features: string[] };
+const clean = (value?: string) => value?.trim() || undefined;
+export const products: Product[] = [
+{ id: 'hallium', number: '01', name: 'Hallium', kicker: 'A calmer way to learn Korean', description: 'Build the language, one meaningful word and conversation at a time.', category: 'LANGUAGE COMPANION', accent: 'peach', href: clean(process.env.NEXT_PUBLIC_HALLIUM_URL) || 'https://hallium.vercel.app', features: ['Vocabulary', 'Grammar', 'Language partners'] },
+{ id: 'kmate', number: '02', name: 'KMate', kicker: 'Your way into Korea', description: 'Meet fellow applicants, prepare your application and practice with AI interviews.', category: 'STUDY IN KOREA', accent: 'lilac', href: clean(process.env.NEXT_PUBLIC_KMATE_URL), features: ['GKS preparation', 'Discover people', 'Interview practice'] },
+{ id: 'video', number: '03', name: 'Haneul Video Lab', kicker: 'Learn from real moments', description: 'Learn Korean through contextual videos and listening practice.', category: 'VIDEO LEARNING', accent: 'mint', href: clean(process.env.NEXT_PUBLIC_VIDEO_LAB_URL) || 'https://korean-video-lab.vercel.app', features: ['Context lessons', 'Listening', 'Sentence mining'] },
+{ id: 'drama', number: '04', name: 'K-Drama Interactive', kicker: 'Step inside the story', description: 'Explore Korean through interactive scenes, dialogue choices and storytelling.', category: 'STORY LEARNING', accent: 'yellow', href: clean(process.env.NEXT_PUBLIC_DRAMA_URL), features: ['Drama scenes', 'Dialogue', 'Story immersion'] }
+];
