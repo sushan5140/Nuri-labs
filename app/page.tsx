@@ -1,2 +1,2 @@
-import Hub from '@/components/hub';
-export default function Home() { return <Hub />; }
+import Flagship from '@/components/flagship';
+export default function Home() { return <Flagship />; }
