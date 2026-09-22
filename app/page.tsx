@@ -1,2 +1,2 @@
-import Flagship from '@/components/flagship';
-export default function Home() { return <Flagship />; }
+import NuriAtlas from '@/components/atlas';
+export default function Home() { return <NuriAtlas />; }
