@@ -21,11 +21,11 @@ Open http://localhost:3000. For a first-time clone: `git clone https://github.co
 
 The live page is `components/atlas.tsx` with `app/atlas.css`. Earlier `flagship.tsx` and `hub.tsx` designs remain in Git history/source as visual references and are not rendered by the current page.
 
-- An **interactive universe map** with four distinct clickable destinations and a central NURI landmark.
-- A **four-room Experience Studio**. Its Hallium flip-card, Video Lab guess-before-reveal and word breakdown, K-Drama dialogue choices, and KMate sample exploration checklist all respond to interaction.
-- Product-specific editorial bento cards with differentiated rose / mint / gold / lavender colors.
-- A journey route picker that leads to the corresponding sample experience.
-- A hub with searchable/filterable products, local saved-world bookmarks, and verified product launch links. Configure the KMate URL in `.env.local` when its official destination is verified.
+- **One Universe** is the single world-selection experience: the interactive orbital map chooses Hallium, Haneul Video Lab, K-Drama Interactive or KMate.
+- **Enter this world** opens a focused, color-coded sample overlay within the universe journey: Hallium word reveals, Video Lab guess-before-reveal and word breakdown, K-Drama dialogue choices, or KMate's sample exploration checklist.
+- The former separate Experience Room and repeated four-product bento grid are no longer rendered; the homepage is deliberately less repetitive.
+- A simple journey route picker opens the selected world directly. Dramatic backstories/origin narratives are deliberately postponed until the UI is approved.
+- A hub with searchable/filterable products, local saved-world bookmarks, and available product launch links (KMate's destination is still unverified). Configure the KMate URL in `.env.local` when its official destination is verified.
 - Responsive mobile layout, keyboard-readable real buttons, visible focus states, and reduced-motion support.
 
 The four on-site interactions are **original illustrative samples, not embedded or live data from the child products**. They do not mark tasks done on KMate, claim Video Lab video playback, or save Hallium learning history. Starred products are stored in the current browser's localStorage only.
