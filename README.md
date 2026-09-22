@@ -1,10 +1,10 @@
-# NURI Labs
+# NURI Labs — Flagship UI
 
-Independent student-led educational technology initiative connecting Hallium, KMate, Haneul Video Lab and K-Drama Interactive.
+An independent student-led educational technology initiative connecting four separate products: **Hallium**, **KMate**, **Haneul Video Lab**, and **Haneul K-Drama Interactive**.
 
-## Localhost first — no deployment
+## Localhost first — no Vercel deployment
 
-On Windows PowerShell in the already-cloned directory:
+On Windows PowerShell, inside your existing Nuri-labs directory:
 
 ```powershell
 git pull origin main
@@ -12,34 +12,29 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:3000**. If the development server is already running, use `Ctrl+C` and restart it after pulling.
+Open **http://localhost:3000**. If the development server is already running, use `Ctrl+C` and restart after pulling. For a clean clone, use `git clone https://github.com/sushan5140/Nuri-labs.git`, enter the folder and run `.\start-local.cmd`.
 
-For a fresh clone:
+**Do not deploy to Vercel until the owner reviews localhost and requests it explicitly.**
 
-```powershell
-git clone https://github.com/sushan5140/Nuri-labs.git
-cd Nuri-labs
-.\start-local.cmd
-```
+## Flagship redesign
 
-Do **not** run a production deployment until the owner reviews the localhost build.
+The live localhost homepage uses `components/flagship.tsx` and `app/flagship.css`.
 
-## What the current UI does
+- A colorful editorial hero and interactive four-product showcase with prev/next and direct selection.
+- Four distinct product visual identities: rose Hallium, lavender KMate, aqua Haneul Video Lab, and warm gold K-Drama Interactive.
+- Rich illustrative UI scenes (not screenshots or live child-product data).
+- Working three-question Korean meaning sample, with answer feedback and next question. It is not saved into a real learning account.
+- Guided learner path selector that recommends existing NURI products.
+- Hub search, filters and saved products (stars saved in **this browser's localStorage only**).
+- Keyboard-accessible product detail dialogs, responsive mobile navigation and reduced-motion support.
+- Previous home components and styles remain in the repository for reference but are not loaded by the flagship page.
 
-- Interactive, click-to-switch product previews in the homepage hero.
-- Product detail dialog with verified external launch links and Escape-to-close behavior.
-- Interactive starting-point selector with recommended NURI products.
-- Product search and category filters, including Saved.
-- Save-for-later stars stored **only in this browser's localStorage**, not in Supabase.
-- Responsive navigation, intentional micro-interactions and reduced-motion support.
-- GitHub Actions verifies TypeScript and the Next.js build; it does **not** deploy the website.
+## Product links and data boundaries
 
-## Product links and boundaries
+Set destination URLs in `.env.local` based on `.env.example`. The KMate production destination is intentionally unset until verified; its on-site preview works, but external launch is marked coming soon.
 
-Edit `.env.local` based on `.env.example` to configure product destinations. The KMate URL is intentionally unset until verified. Previewing KMate still works inside NURI Labs; its external launch is labeled `LINK SOON` until an official URL is added.
+This **does not** merge Google sessions, Supabase data or child-app code. A unified Learning Passport and shared login require future design and explicit consent. Existing product apps and deployments remain unchanged.
 
-The product previews on NURI Labs are *illustrative UI*, not live data from the child applications. Existing applications, Supabase projects, user sessions and data remain independent. Shared sign-in and Learning Passport are roadmap items only, not released.
+## Stack
 
-## Tech
-
-Next.js / React / TypeScript / CSS / Lucide icons. No animation library or new service keys needed. Motion uses short transform/opacity transitions with `prefers-reduced-motion` support.
+Next.js 15, React 19, TypeScript, CSS and Lucide. No added animation dependency, API keys or backend for the local UI. Github Actions performs TypeScript and Next.js build checks; it does not deploy.
