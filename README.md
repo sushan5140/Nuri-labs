@@ -1,40 +1,37 @@
-# NURI Labs — Flagship UI
+# NURI Labs / Atlas preview
 
-An independent student-led educational technology initiative connecting four separate products: **Hallium**, **KMate**, **Haneul Video Lab**, and **Haneul K-Drama Interactive**.
+NURI Labs is a student-led educational technology initiative connecting **Hallium**, **Haneul Video Lab**, **Haneul K-Drama Interactive**, and **KMate**. This repository hosts only their independent parent hub.
 
-## Localhost first — no Vercel deployment
+## Localhost only — no deployment
 
-On Windows PowerShell, inside your existing Nuri-labs directory:
+In your existing Windows PowerShell clone:
 
 ```powershell
+# Stop the current npm server first with Ctrl+C and answer Y if prompted.
 git pull origin main
 npm install
 npm run dev
 ```
 
-Open **http://localhost:3000**. If the development server is already running, use `Ctrl+C` and restart after pulling. For a clean clone, use `git clone https://github.com/sushan5140/Nuri-labs.git`, enter the folder and run `.\start-local.cmd`.
+Open http://localhost:3000. For a first-time clone: `git clone https://github.com/sushan5140/Nuri-labs.git`, `cd Nuri-labs`, then `.\start-local.cmd`.
 
-**Do not deploy to Vercel until the owner reviews localhost and requests it explicitly.**
+**Do not deploy to Vercel until the owner explicitly requests it.**
 
-## Flagship redesign
+## Atlas interface (local UI)
 
-The live localhost homepage uses `components/flagship.tsx` and `app/flagship.css`.
+The live page is `components/atlas.tsx` with `app/atlas.css`. Earlier `flagship.tsx` and `hub.tsx` designs remain in Git history/source as visual references and are not rendered by the current page.
 
-- A colorful editorial hero and interactive four-product showcase with prev/next and direct selection.
-- Four distinct product visual identities: rose Hallium, lavender KMate, aqua Haneul Video Lab, and warm gold K-Drama Interactive.
-- Rich illustrative UI scenes (not screenshots or live child-product data).
-- Working three-question Korean meaning sample, with answer feedback and next question. It is not saved into a real learning account.
-- Guided learner path selector that recommends existing NURI products.
-- Hub search, filters and saved products (stars saved in **this browser's localStorage only**).
-- Keyboard-accessible product detail dialogs, responsive mobile navigation and reduced-motion support.
-- Previous home components and styles remain in the repository for reference but are not loaded by the flagship page.
+- An **interactive universe map** with four distinct clickable destinations and a central NURI landmark.
+- A **four-room Experience Studio**. Its Hallium flip-card, Video Lab guess-before-reveal and word breakdown, K-Drama dialogue choices, and KMate sample exploration checklist all respond to interaction.
+- Product-specific editorial bento cards with differentiated rose / mint / gold / lavender colors.
+- A journey route picker that leads to the corresponding sample experience.
+- A hub with searchable/filterable products, local saved-world bookmarks, and verified product launch links. Configure the KMate URL in `.env.local` when its official destination is verified.
+- Responsive mobile layout, keyboard-readable real buttons, visible focus states, and reduced-motion support.
 
-## Product links and data boundaries
+The four on-site interactions are **original illustrative samples, not embedded or live data from the child products**. They do not mark tasks done on KMate, claim Video Lab video playback, or save Hallium learning history. Starred products are stored in the current browser's localStorage only.
 
-Set destination URLs in `.env.local` based on `.env.example`. The KMate production destination is intentionally unset until verified; its on-site preview works, but external launch is marked coming soon.
+No existing child-product repository, Supabase configuration, user account, production website or saved progress is modified. Shared sign-in and a Learning Passport remain future work.
 
-This **does not** merge Google sessions, Supabase data or child-app code. A unified Learning Passport and shared login require future design and explicit consent. Existing product apps and deployments remain unchanged.
+## Verification
 
-## Stack
-
-Next.js 15, React 19, TypeScript, CSS and Lucide. No added animation dependency, API keys or backend for the local UI. Github Actions performs TypeScript and Next.js build checks; it does not deploy.
+GitHub Actions runs TypeScript and Next.js build checks on pushes. It does **not** deploy to Vercel.
