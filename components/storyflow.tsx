@@ -86,14 +86,6 @@ export default function StoryFlow({onOpen,onExplore}:{onOpen:(id:WorldId)=>void;
  };
  const advance=()=>choose((index+1)%moments.length);
  return <section className="sf" id="our-story">
-  <div className="sf-prologue"><div className="na-wrap sf-prologue-inner">
-   <div className="sf-prologue-top"><span className="sf-dot"/> THE STORY WE ARE BUILDING <span>THE NURI NOTEBOOK / 001</span></div>
-   <div className="sf-prologue-center"><span className="sf-paper-star" aria-hidden="true">✳</span><h2>Big things rarely begin<br/>with something <em>big.</em></h2>
-   <p>Sometimes they begin with a word. A scene. A question you keep returning to. A place you hope to see one day.</p>
-   <p className="sf-prologue-last">NURI Labs is a home for what happens <strong>after that first spark.</strong></p></div>
-   <div className="sf-prologue-bottom"><span>ONE CURIOUS MOMENT LEADS TO ANOTHER</span><span>↓ SCROLL INTO THE STORY</span></div>
-  </div></div>
-
   <div className="sf-journey na-wrap"><div className="sf-intro"><span>THE THREAD THAT CONNECTS US / 04 MOMENTS</span><h2>Follow the little<br/><em>things that grow.</em></h2><p>Not four separate origin speeches. One evolving experience—each world picks up the thread from the one before it.</p></div>
    <div className={'sf-story-stage sf-stage-'+current.id}>
     <div className="sf-stage-head"><span><i/> NURI / {current.small}</span><span>{current.number} <b>/ 04</b></span></div>

@@ -25,7 +25,7 @@ The live page is `components/atlas.tsx` with `app/atlas.css`. The single officia
 - **One Universe** is the interactive orbital map for Hallium, Haneul Video Lab, K-Drama Interactive and KMate.
 - **Enter this world** opens an original illustrative sample in each world; it does not access child-app data.
 - **Find your path** offers a simple journey picker to choose a starting point.
-- **Our story** is one unfolding, interactive narrative: a first word, real listening, a drama scene, and a future in Korea.
+- **Our story** starts directly with the four-moment interactive journey (a first word, real listening, a drama scene, and a future in Korea); the redundant full-height purple prologue was retired.
 - The hub includes searchable/filterable experiences, browser-local saved worlds, and product launch links where configured.
 - Mobile-friendly UI, keyboard-readable controls, visible focus states and reduced-motion support.
 
